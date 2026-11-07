@@ -1,0 +1,9 @@
+Picova Tech — Official Technology Partner of Picobazar
+
+Highlighted on:
+- Picobazar case-study page: premium feature banner
+- Homepage featured project badge and tagline
+- Projects page featured project badge and tagline
+- Updated Picobazar metadata and structured-data contributor attribution
+
+Deployment: upload this complete site to Vercel or your current host.
