@@ -1,0 +1,5 @@
+Leadership section added to index.html (home) and about.html.
+Photos: md-alamin.webp, md-arif-hasan-awal.webp.
+Names, company roles, and LinkedIn/Facebook profile links as provided.
+CSS added to styles.css.
+Deploy all files together; keep the new WebP images in the same directory as the HTML files.

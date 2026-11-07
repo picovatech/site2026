@@ -120,3 +120,48 @@
     }, 5000);
   } else if(badge){ badge.style.display = 'none'; }
 })();
+
+/* Reveal sections once without hiding content when scripts are unavailable. */
+(function () {
+  if (!window.IntersectionObserver || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('in-view');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('main .section-head, .project-card, .portfolio-card, .review-panel').forEach(function (element) {
+    observer.observe(element);
+  });
+})();
+
+/* Open a private review message using the site's existing WhatsApp number. */
+(function () {
+  var form = document.getElementById('review-form');
+  if (!form) return;
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var fields = ['reviewer', 'project', 'review'].map(function (name) {
+      return form.elements.namedItem(name);
+    });
+    var blankField = fields.find(function (field) { return !field.value.trim(); });
+    if (blankField) {
+      blankField.value = '';
+      blankField.reportValidity();
+      return;
+    }
+
+    var message = [
+      'Picova Tech client review',
+      'Name: ' + fields[0].value.trim(),
+      'Project: ' + fields[1].value.trim(),
+      'Rating: ' + form.elements.namedItem('rating').value + '/5',
+      '',
+      fields[2].value.trim()
+    ].join('\n');
+    window.location.assign('https://wa.me/8801575847515?text=' + encodeURIComponent(message));
+  });
+  form.querySelector('button[type="submit"]').disabled = false;
+})();
